@@ -48,6 +48,22 @@ Or for local development:
 4. Assign your Campaign to the `QuestManager` component on the canvas.
 5. Add `QuestTrigger` to interactable objects or trigger volumes to complete tasks as the player progresses.
 
+## Scripted events and story flags
+
+For story beats that are more than "complete an objective": a `GameSequence` is a list of steps
+(wait, play a sound, kill the lights, fade to black, freeze the player, show dialogue, set a
+flag, complete an objective...) played top to bottom. Start it with a `SequenceTriggerVolume`
+(walk in), a `SequenceInteractable` (press E), a `SequenceFlagTrigger` (when flags say so), or
+any UnityEvent calling `Play()`.
+
+1. Put one `SequenceDirector` in each scene, with an `FpcSequenceBridge` (player and fader) and a
+   `DialogueSequenceBridge` (dialogue box) next to it. Those come from the adapters, which compile
+   only when the first-person controller and dialogue packages are installed.
+2. Create story flags with **Assets > Create > Retro Quest System > Story Flag**; watch and edit
+   them live in **Retro > Story Flags**.
+3. Add steps with the sequence's **+** menu. For a new step type, derive from `SequenceStep` and
+   mark it `[Serializable]` and `[SequenceStepMenu("Group/Name")]`.
+
 ## License
 
 [MIT License](LICENSE.md) © 2026 Phillip Banky

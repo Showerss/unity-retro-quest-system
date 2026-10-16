@@ -1,0 +1,25 @@
+{
+    "name": "Retro.QuestSystem.Adapters.Dialogue",
+    "rootNamespace": "Retro.QuestSystem.Adapters",
+    "references": [
+        "Retro.QuestSystem",
+        "Retro.Dialogue"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "RETRO_QUEST_DIALOGUE"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.retro.dialogue",
+            "expression": "",
+            "define": "RETRO_QUEST_DIALOGUE"
+        }
+    ],
+    "noEngineReferences": false
+}

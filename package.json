@@ -1,6 +1,6 @@
 {
   "name": "com.retro.questsystem",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "displayName": "Retro Quest System",
   "description": "Modular retro 90s quest and objective tracker with chapter hierarchies, sequential reveals, and persistent campaign tracking.",
   "unity": "6000.0",

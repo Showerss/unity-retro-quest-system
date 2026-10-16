@@ -1,0 +1,25 @@
+{
+    "name": "Retro.QuestSystem.Adapters.Fpc",
+    "rootNamespace": "Retro.QuestSystem.Adapters",
+    "references": [
+        "Retro.QuestSystem",
+        "FirstPersonController"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "RETRO_QUEST_FPC"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.firstperson.controller",
+            "expression": "",
+            "define": "RETRO_QUEST_FPC"
+        }
+    ],
+    "noEngineReferences": false
+}
