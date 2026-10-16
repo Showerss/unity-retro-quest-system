@@ -32,6 +32,12 @@ namespace Retro.QuestSystem
         [Tooltip("Reset objective completion states on Play mode start (useful for development).")]
         [SerializeField] private bool _resetProgressOnPlay = true;
 
+        /// <summary>The campaign this manager runs, if one is assigned.</summary>
+        public CampaignDefinition Campaign => _campaign;
+
+        /// <summary>The chapter started when no campaign is assigned.</summary>
+        public ChapterDefinition StartingChapter => _startingChapter;
+
         // Runtime State
         public ChapterDefinition ActiveChapter { get; private set; }
         public QuestDefinition ActiveQuest { get; private set; }
