@@ -100,7 +100,7 @@ namespace Retro.QuestSystem
 
             if (chapter.quests.Count > 0 && chapter.quests[0] != null)
             {
-                StartQuest(chapter.quests[0]);
+                BeginQuest(chapter.quests[0]);
             }
             else
             {
@@ -108,10 +108,24 @@ namespace Retro.QuestSystem
             }
         }
 
-        public void StartQuest(QuestDefinition quest)
+        /// <summary>
+        /// Makes <paramref name="quest"/> the active quest. Refuses (returns false, changes nothing) while a
+        /// different, incomplete quest is active, so its progress is not lost. Restarting the active quest is allowed.
+        /// </summary>
+        /// <param name="quest">Quest to start.</param>
+        /// <param name="replaceActive">True to replace an incomplete active quest anyway (e.g. restoring a save).</param>
+        /// <returns>True if <paramref name="quest"/> is now the active quest.</returns>
+        public bool StartQuest(QuestDefinition quest, bool replaceActive = false)
         {
-            if (quest == null) return;
+            if (quest == null) return false;
+            if (!replaceActive && ActiveQuest != null && ActiveQuest != quest && !ActiveQuest.IsQuestComplete()) return false;
 
+            BeginQuest(quest);
+            return true;
+        }
+
+        private void BeginQuest(QuestDefinition quest)
+        {
             ActiveQuest = quest;
             ActiveObjectiveIndex = Mathf.Max(0, quest.GetFirstIncompleteIndex());
             if (ActiveObjectiveIndex < 0) ActiveObjectiveIndex = 0;
@@ -134,7 +148,8 @@ namespace Retro.QuestSystem
                         var candidate = q.GetObjective(objectiveId);
                         if (candidate != null)
                         {
-                            if (ActiveQuest != q) StartQuest(q);
+                            // Chapter quests may be progressed out of order: switch without the refusal guard.
+                            if (ActiveQuest != q) BeginQuest(q);
                             obj = candidate;
                             break;
                         }
@@ -209,7 +224,7 @@ namespace Retro.QuestSystem
             int currentIdx = ActiveChapter.quests.IndexOf(ActiveQuest);
             if (currentIdx >= 0 && currentIdx + 1 < ActiveChapter.quests.Count)
             {
-                StartQuest(ActiveChapter.quests[currentIdx + 1]);
+                BeginQuest(ActiveChapter.quests[currentIdx + 1]);
             }
             else
             {
