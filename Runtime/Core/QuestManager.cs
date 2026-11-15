@@ -133,6 +133,16 @@ namespace Retro.QuestSystem
             OnQuestStarted?.Invoke(ActiveQuest);
         }
 
+        /// <summary>Clears the active quest and active chapter (e.g. when restoring a save with no active quest).</summary>
+        public void ClearActiveQuest()
+        {
+            ActiveChapter = null;
+            ActiveQuest = null;
+            ActiveObjectiveIndex = 0;
+
+            OnQuestStarted?.Invoke(null);
+        }
+
         public void CompleteObjective(string objectiveId)
         {
             if (ActiveQuest == null) return;
