@@ -48,6 +48,14 @@ Or for local development:
 4. Assign your Campaign to the `QuestManager` component on the canvas.
 5. Add `QuestTrigger` to interactable objects or trigger volumes to complete tasks as the player progresses.
 
+## Quest HUD completion presentation
+
+- The shipped row template has a `QuestHUDRow` with explicit checkbox, description and ink Image references. Custom templates must wire the same three references; keep the ink under the description, outside the row layout group.
+- Rows are reused across refreshes. Live completion events capture text/counts, draw a short first-line ink stroke for 0.18 unscaled seconds, then hold the completed checkbox and wrapping text strike for 0.45 seconds. Both durations are tunable on `QuestHUD`.
+- Sequential completions queue in event order; other display modes animate completed rows together. Quest/chapter changes and HUD closure cancel pending feedback. Opening the HUD or restoring quest state only renders current state.
+- `QuestHUD.AnimateCompletion = false` cancels motion and holds immediately. Progression and the existing objective/quest completion sounds are independent of presentation.
+- Presentation regression tests live alongside the consuming game's quest tests in `Assets/_Game/Tests/Editor/QuestHUDTests.cs`.
+
 ## Scripted events and story flags
 
 For story beats that are more than "complete an objective": a `GameSequence` is a list of steps
